@@ -5,6 +5,8 @@ import Filters from "@/components/filters/Filter";
 import Header from "@/components/header/Header";
 import React, { useState } from "react";
 import classes from "./task.module.scss";
+import TaskTracker from "@/components/task-tracker/TaskTracker";
+import Boards from "@/components/boards/Boards";
 
 const Task: React.FC = () => {
   const [toggle, setToggle] = useState(1);
@@ -30,6 +32,7 @@ const Task: React.FC = () => {
         </span>
       </div>
       <Filters />
+      {toggle === 1 ? <TaskTracker /> : <Boards />}
     </div>
   );
 };

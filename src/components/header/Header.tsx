@@ -15,7 +15,7 @@ const Header: React.FC = () => {
       </div>
       <div className={classes.container}>
         <div className={classes.userSection}>
-          <Image width={50} height={50} alt="user-img" src={""} />
+          {/* <Image width={50} height={50} alt="user-img" src={"null"} /> */}
           User
         </div>
         <div className={classes.logoutBtn}>

@@ -1,0 +1,63 @@
+.taskRow {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    background-color: #f9fafb;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.titleCell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  .titles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+.dates {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status {
+  background-color: #dddadd;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+
+    &:hover {
+      background-color: #f3f4f6;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.boardContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 50px;
+
+  .boardBox {
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    min-height: 500px;
+    padding: 20px;
+    flex: 1;
+    .board-todo-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      background-color: #fac3ff;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .board-progress-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      background-color: #85d9f1;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .board-complete-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      background-color: #a2d6a0;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  }
+}
