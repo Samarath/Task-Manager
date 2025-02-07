@@ -1,0 +1,42 @@
+.filtersContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fff;
+  justify-content: space-between;
+
+  .firstSection {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .selectContainer {
+      flex-grow: 1;
+    }
+  }
+
+  .secondSection {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .selectInput {
+      width: 100%;
+      border-radius: 25px;
+
+      .MuiSelect-select {
+        padding: 10px 14px;
+      }
+    }
+
+    .searchInput {
+      flex-grow: 2;
+    }
+
+    .addTaskButton {
+      background-color: #7b1984;
+      color: white;
+      text-transform: none;
+      padding: 10px 16px;
+      border-radius: 30px;
+    }
+  }
+}

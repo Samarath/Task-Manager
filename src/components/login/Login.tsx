@@ -4,8 +4,11 @@ import TaskIcon from "../../assests/svg-icons/TaskIcon";
 import HomeCircleIcon from "@/assests/svg-icons/HomeCircleIcon";
 import { Button } from "@mui/material";
 import GoogleIcon from "@/assests/svg-icons/GoogleIcon";
+import React from "react";
+import { useRouter } from "next/navigation";
 
-const Login = () => {
+const Login: React.FC = () => {
+  const navigation = useRouter();
   return (
     <div className={classes["login-container"]}>
       <div className={classes["content"]}>
@@ -19,7 +22,10 @@ const Login = () => {
           Streamline your workflow and track progress effortlessly with our
           all-in-one task management app.
         </p>
-        <div className={classes["login-btn"]}>
+        <div
+          className={classes["login-btn"]}
+          onClick={() => navigation.push("/task")}
+        >
           <Button
             variant="outlined"
             color="primary"
