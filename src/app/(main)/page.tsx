@@ -1,7 +1,13 @@
 "use client";
 
+import Login from "@/components/login/Login";
+
 function Home() {
-  return <div>something coming</div>;
+  return (
+    <div>
+      <Login />
+    </div>
+  );
 }
 
 export default Home;
