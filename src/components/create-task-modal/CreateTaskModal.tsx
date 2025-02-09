@@ -28,7 +28,7 @@ interface CreateTaskModalProps {
 }
 
 const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
-  const [taskData, setTaskData] = useState<TasksType>({
+  const initialState = {
     id: "",
     title: "",
     description: "",
@@ -36,7 +36,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
     category: Category.Work,
     date: [],
     files: [],
-  });
+  };
+  const [taskData, setTaskData] = useState<TasksType>(initialState);
 
   const [currentDate, setCurrentDate] = useState<string | null>(null);
   const dispatch = useAppDispatch();
@@ -66,6 +67,11 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
   const handleStatusChange = (status: Status) => {
     setTaskData((prev) => ({ ...prev, status }));
   };
+  function generateUniqueId() {
+    const timestamp = performance.now().toString(36);
+    const randomNumber = Math.random().toString(36).substr(2, 9);
+    return timestamp + randomNumber;
+  }
 
   const handleDateChange = (date: dayjs.Dayjs | null) => {
     const formattedDate = date?.format("DD/MM/YYYY") || "";
@@ -76,21 +82,19 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
     }));
   };
 
-  //   const handleDisableButton = () => {
-  //     if (
-  //       taskData.id &&
-  //       taskData.description &&
-  //       taskData.status &&
-  //       taskData.date.length
-  //     ) {
-  //       return false;
-  //     }
-  //     return true;
-  //   };
-
   const handleSubmit = () => {
-    dispatch(createTask(taskData));
-    onClose();
+    if (
+      taskData.status &&
+      taskData.date &&
+      taskData.description &&
+      taskData.title
+    ) {
+      dispatch(createTask({ ...taskData, id: generateUniqueId() }));
+      setTaskData(initialState);
+      onClose();
+    } else {
+      alert("fill fill all the necessary fields");
+    }
   };
 
   return (
@@ -231,7 +235,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
                   </MenuItem>
                   <MenuItem value={Status.ToDo}>To Do</MenuItem>
                   <MenuItem value={Status.InProcess}>In Progress</MenuItem>
-                  <MenuItem value={Status.Completed}>Done</MenuItem>
+                  <MenuItem value={Status.Completed}>Completed</MenuItem>
                 </Select>
               </FormControl>
             </div>

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Task } from "../types/types";
+import { Task, TasksType } from "../types/types";
 import classes from "./task-row.module.scss";
 import CheckMark from "@/assests/svg-icons/CheckMark";
 import TooltipMenu from "../tool-tip-menu/ToolTipMenu";
@@ -7,7 +7,7 @@ import TaskStatusToolTipMenu from "../task-status-tool-tip-menu/TaskStatusToolTi
 import DragIcon from "@/assests/svg-icons/DragIcon";
 
 interface TaskRowProps {
-  task: Task;
+  task: TasksType;
   onEdit?: (task: Task) => void;
   onDelete?: (taskId: number) => void;
 }
@@ -28,7 +28,7 @@ const TaskRow: FC<TaskRowProps> = ({ task, onEdit, onDelete }) => {
             <span>{task.title}</span>
           </div>
         </div>
-        <div className={classes["dates"]}>{task.dueDate}</div>
+        <div className={classes["dates"]}>{task.date[0]}</div>
         <div>
           <TaskStatusToolTipMenu status={task.status} />
         </div>

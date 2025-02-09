@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Droppable, Draggable } from "@hello-pangea/dnd";
-import { Task } from "../types/types";
+import { Task, TasksType } from "../types/types";
 import TaskRow from "../tasks/TaskRow";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import classes from "./task-tracker.module.scss";
@@ -9,7 +9,7 @@ import { Button } from "@mui/material";
 import AddTaskIcon from "@/assests/svg-icons/AddTaskIcon";
 
 interface TodoSectionProps {
-  tasks: Task[];
+  tasks: TasksType[];
   todoViewToggle: boolean;
   handleCompoToggle: () => void;
   handleEditTask: (task: Task) => void;

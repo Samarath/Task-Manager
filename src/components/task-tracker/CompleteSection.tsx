@@ -1,12 +1,12 @@
 import React from "react";
 import { Droppable, Draggable } from "@hello-pangea/dnd";
-import { Task } from "../types/types";
+import { Task, TasksType } from "../types/types";
 import TaskRow from "../tasks/TaskRow";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import classes from "./task-tracker.module.scss";
 
 interface CompletedSectionProps {
-  tasks: Task[];
+  tasks: TasksType[];
   completeViewToggle: boolean;
   handleCompoToggle: () => void;
   handleEditTask: (task: Task) => void;
