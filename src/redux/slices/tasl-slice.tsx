@@ -1,30 +1,12 @@
+import { TasksType } from "@/components/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-enum Status {
-  ToDo = "to-do",
-  InProcess = "in-process",
-  Completed = "completed",
-}
+type taskState = {
+  taskList: TasksType[];
+};
 
-enum Category {
-  Work = "work",
-  Professional = "professional",
-}
-
-interface TasksType {
-  id: string;
-  title: string;
-  status: Status;
-  category: Category;
-  date: string;
-}
-
-const initialState: TasksType = {
-  id: "",
-  title: "",
-  status: Status.ToDo,
-  category: Category.Work,
-  date: "",
+const initialState: taskState = {
+  taskList: [],
 };
 
 const userSlice = createSlice({
@@ -32,14 +14,18 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     createTask: (state, action: PayloadAction<TasksType>) => {
-      state.id = action.payload.id;
-      state.title = action.payload.title;
-      state.status = action.payload.status;
-      state.category = action.payload.category;
-      state.date = action.payload.date;
+      state.taskList.push(action.payload);
+    },
+    updateTask: (state, action: PayloadAction<TasksType>) => {
+      const index = state.taskList.findIndex(
+        (task) => task.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.taskList[index] = action.payload;
+      }
     },
   },
 });
 
-export const { createTask } = userSlice.actions;
+export const { createTask, updateTask } = userSlice.actions;
 export default userSlice.reducer;

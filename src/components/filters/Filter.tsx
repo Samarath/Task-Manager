@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Select, MenuItem, TextField, Button } from "@mui/material";
 import classes from "./filter.module.scss";
+import CreateTaskModal from "../create-task-modal/CreateTaskModal";
 
 const Filters: React.FC = () => {
   const [category, setCategory] = useState("Category");
   const [dueDate, setDueDate] = useState("Due Date");
+  const [open, setOpen] = useState(false);
 
+  const handleSubmit = (taskData) => {
+    console.log("Task Data:", taskData);
+  };
   return (
     <div className={classes.filtersContainer}>
       <div className={classes.firstSection}>
@@ -66,9 +71,15 @@ const Filters: React.FC = () => {
           variant="contained"
           color="primary"
           className={classes.addTaskButton}
+          onClick={() => setOpen(true)}
         >
           ADD TASK
         </Button>
+        <CreateTaskModal
+          open={open}
+          onClose={() => setOpen(false)}
+          onSubmit={handleSubmit}
+        />
       </div>
     </div>
   );

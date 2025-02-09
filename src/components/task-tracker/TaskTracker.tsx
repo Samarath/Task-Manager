@@ -5,6 +5,7 @@ import TodoSection from "./TodoSection";
 import InProgressSection from "./InProgressSection";
 import CompletedSection from "./CompleteSection";
 import classes from "./task-tracker.module.scss";
+import { useAppSelector } from "@/redux/store";
 
 const TaskTracker: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([
@@ -41,6 +42,8 @@ const TaskTracker: React.FC = () => {
   const [todoViewToggle, setTodoViewToggle] = useState(false);
   const [progressViewToggle, setProgressViewToggle] = useState(false);
   const [completeViewToggle, setCompleteViewToggle] = useState(false);
+  const { taskList } = useAppSelector((state) => state.taskManager);
+  console.log(taskList);
 
   const handleCompoToggle = (id: number) => {
     if (id === 1) {

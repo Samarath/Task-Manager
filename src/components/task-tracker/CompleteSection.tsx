@@ -22,9 +22,12 @@ const CompletedSection: React.FC<CompletedSectionProps> = ({
 }) => {
   return (
     <div className={classes.section}>
-      <div className={`${classes.sectionHeader} ${classes.completed}`}>
+      <div
+        className={`${classes.sectionHeader} ${classes.completed}`}
+        onClick={handleCompoToggle}
+      >
         <h2 className="font-semibold">Completed ({tasks.length})</h2>
-        <span onClick={handleCompoToggle} className={classes.toggle}>
+        <span className={classes.toggle}>
           {completeViewToggle ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
         </span>
       </div>

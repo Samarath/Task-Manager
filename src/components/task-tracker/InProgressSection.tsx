@@ -22,9 +22,12 @@ const InProgressSection: React.FC<InProgressSectionProps> = ({
 }) => {
   return (
     <div className={classes.section}>
-      <div className={`${classes.sectionHeader} ${classes.inProgress}`}>
+      <div
+        className={`${classes.sectionHeader} ${classes.inProgress}`}
+        onClick={handleCompoToggle}
+      >
         <h2 className="font-semibold">In-Progress ({tasks.length})</h2>
-        <span onClick={handleCompoToggle} className={classes.toggle}>
+        <span className={classes.toggle}>
           {progressViewToggle ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
         </span>
       </div>

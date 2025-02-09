@@ -1,0 +1,184 @@
+.dialogTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 1.5rem !important;
+  color: #2f2f2f;
+  font-weight: 600 !important;
+}
+
+.closeButton {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px !important;
+}
+
+.text-editor {
+  position: relative;
+  .editor {
+    margin-bottom: 16px;
+    background-color: #f1f1f1;
+
+    :global(.ql-toolbar) {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    :global(.ql-container) {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      height: calc(100% - 42px);
+    }
+    :global(.ql-editor) {
+      height: 100px;
+      max-height: 250px;
+      overflow: auto;
+    }
+  }
+  .count {
+    position: absolute;
+    bottom: 20;
+    right: 10;
+    color: #1e212a;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+}
+
+.formRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  .category {
+    font-size: 0.75rem;
+    color: #00000099;
+    font-weight: 600;
+    p {
+      margin-bottom: 10px;
+      margin-left: 5px;
+    }
+    .toggle-category {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .active {
+        border: 1px solid #00000030;
+        border-radius: 41px;
+        padding: 10px 24px;
+        color: #090909;
+        font-weight: 600;
+        font-size: 0.875rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: rgb(214, 214, 214);
+      }
+      .normal {
+        border: 1px solid #00000030;
+        border-radius: 41px;
+        padding: 10px 24px;
+        color: #090909;
+        font-weight: 600;
+        font-size: 0.875rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+    }
+  }
+  .date-picker {
+    font-size: 0.75rem;
+    color: #00000099;
+    font-weight: 600;
+    p {
+      margin-bottom: 10px;
+      margin-left: 5px;
+    }
+  }
+  .options {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.statusSelect {
+  min-width: 200px;
+  font-size: 0.75rem;
+  color: #00000099;
+  font-weight: 600;
+  p {
+    margin-bottom: 10px;
+    margin-left: 5px;
+  }
+}
+
+.attachmentSection {
+  margin-top: 16px;
+}
+
+.attachmentTitle {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #00000099;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.dropZone {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  background-color: #fafafa;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.fileInput {
+  display: none;
+}
+
+.updateLink {
+  color: #2196f3;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+  background-color: #f1f1f1;
+  padding: 20px;
+  .cancel-btn {
+    color: rgba(0, 0, 0, 0.87);
+    border-radius: 41px;
+    border: 1px solid gray;
+    background-color: #fff;
+    padding: 10px 15px;
+  }
+  .create-btn {
+    background-color: #9c27b0 !important;
+    color: white;
+    border-radius: 41px;
+
+    &:hover {
+      background-color: #7b1fa2;
+    }
+  }
+}

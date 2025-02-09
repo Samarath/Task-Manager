@@ -27,23 +27,29 @@ const TodoSection: React.FC<TodoSectionProps> = ({
 
   return (
     <div className={classes.section}>
-      <div className={`${classes.sectionHeader} ${classes.todo}`}>
+      <div
+        className={`${classes.sectionHeader} ${classes.todo}`}
+        onClick={handleCompoToggle}
+      >
         <h2 className="font-semibold">Todo ({tasks.length})</h2>
-        <span onClick={handleCompoToggle} className={classes.toggle}>
+        <span className={classes.toggle}>
           {todoViewToggle ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
         </span>
       </div>
       {todoViewToggle && (
         <>
           <div className={classes["add-task"]}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.addTaskButton}
-              onClick={() => setToggleAddButton(!toggleAddButton)}
-            >
-              <AddTaskIcon />
-            </Button>
+            <div className={classes["btn"]}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.addTaskButton}
+                onClick={() => setToggleAddButton(!toggleAddButton)}
+              >
+                <AddTaskIcon />
+              </Button>
+            </div>
+
             {toggleAddButton && <AddTask />}
           </div>
           <Droppable droppableId="todoTasks">

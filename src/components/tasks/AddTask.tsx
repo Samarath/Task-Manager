@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import { NewTask } from "../types/types";
 import classes from "./task-row.module.scss";
-import { styled, TextField } from "@mui/material";
+import { Button, styled, TextField } from "@mui/material";
 import AddDate from "@/assests/svg-icons/AddDate";
 import AddTaskToolTipMenu from "../add-task-tool-tip-menu/AddTaskToolTipMenu";
-import TaskStatusToolTipMenu from "../task-status-tool-tip-menu/TaskStatusToolTipMenu";
+import EnterIcon from "@/assests/svg-icons/EnterIcon";
 
 interface AddTaskProps {
   onAdd: (task: NewTask) => void;
@@ -72,6 +72,15 @@ const AddTask: FC<AddTaskProps> = ({ onAdd }) => {
         </span>
         <AddTaskToolTipMenu status="status" />
         <AddTaskToolTipMenu status="category" />
+      </div>
+      <div className={classes["btn-group"]}>
+        <Button className={classes["add-btn"]}>
+          Add{" "}
+          <span style={{ marginTop: "5px" }}>
+            <EnterIcon />
+          </span>
+        </Button>
+        <Button className={classes["cancel-btn"]}>Cancel </Button>
       </div>
     </div>
   );
