@@ -23,6 +23,20 @@
   background-color: #f1f1f1;
   border-radius: 10px;
 
+  .add-task {
+    border-bottom: 1px solid gray;
+    padding: 10px;
+    .addTaskButton {
+      margin-left: 15px;
+      background-color: transparent;
+      color: white;
+      text-transform: none;
+      outline: none;
+      box-shadow: none;
+      border-bottom: 1px solid gray;
+    }
+  }
+
   &:last-child {
     margin-bottom: 0;
   }

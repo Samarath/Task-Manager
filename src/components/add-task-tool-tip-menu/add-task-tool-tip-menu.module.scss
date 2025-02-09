@@ -1,0 +1,10 @@
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  width: fit-content;
+}

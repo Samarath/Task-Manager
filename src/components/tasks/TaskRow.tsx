@@ -2,7 +2,8 @@ import { FC } from "react";
 import { Task } from "../types/types";
 import classes from "./task-row.module.scss";
 import CheckMark from "@/assests/svg-icons/CheckMark";
-import { MoreHoriz } from "@mui/icons-material";
+import TooltipMenu from "../tool-tip-menu/ToolTipMenu";
+import TaskStatusToolTipMenu from "../task-status-tool-tip-menu/TaskStatusToolTipMenu";
 
 interface TaskRowProps {
   task: Task;
@@ -25,7 +26,7 @@ const TaskRow: FC<TaskRowProps> = ({ task, onEdit, onDelete }) => {
         </div>
         <div className={classes["dates"]}>{task.dueDate}</div>
         <div>
-          <span className={classes.status}>{task.status}</span>
+          <TaskStatusToolTipMenu status={task.status} />
         </div>
         <div className="flex items-center justify-between">
           <span
@@ -37,9 +38,7 @@ const TaskRow: FC<TaskRowProps> = ({ task, onEdit, onDelete }) => {
           </span>
         </div>
         <div>
-          <span>
-            <MoreHoriz />
-          </span>
+          <TooltipMenu />
         </div>
       </div>
     </div>

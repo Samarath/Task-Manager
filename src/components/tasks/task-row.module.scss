@@ -7,6 +7,19 @@
     background-color: #f9fafb;
   }
 }
+.container {
+  margin-left: 15px;
+  padding: 10px;
+
+  .addDate {
+    background-color: transparent;
+    color: white;
+    text-transform: none;
+    outline: none;
+    box-shadow: none;
+    width: fit-content;
+  }
+}
 
 .grid {
   display: grid;
@@ -32,13 +45,6 @@
 .dates {
   font-size: 0.875rem;
   font-weight: 500;
-}
-
-.status {
-  background-color: #dddadd;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 5px;
 }
 
 .badge {

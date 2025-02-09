@@ -1,7 +1,10 @@
 import { FC, useState } from "react";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { NewTask } from "../types/types";
 import classes from "./task-row.module.scss";
+import { styled, TextField } from "@mui/material";
+import AddDate from "@/assests/svg-icons/AddDate";
+import AddTaskToolTipMenu from "../add-task-tool-tip-menu/AddTaskToolTipMenu";
+import TaskStatusToolTipMenu from "../task-status-tool-tip-menu/TaskStatusToolTipMenu";
 
 interface AddTaskProps {
   onAdd: (task: NewTask) => void;
@@ -22,43 +25,53 @@ const AddTask: FC<AddTaskProps> = ({ onAdd }) => {
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTask({ ...newTask, title: e.target.value });
+  };
+  const BorderlessTextField = styled(TextField)`
+    & .MuiOutlinedInput-root {
+      & fieldset {
+        border: none;
+      }
+      &:hover fieldset {
+        border: none;
+      }
+      &.Mui-focused fieldset {
+        border: none;
+      }
+    }
+
+    & .MuiInputLabel-root {
+      display: none;
+    }
+    & input::placeholder {
+      font-size: 14px;
+    }
+  `;
+
   return (
-    <div>
+    <div className={classes.container}>
       <div className={classes.grid}>
-        <input
-          type="text"
-          placeholder="Task Title"
+        <BorderlessTextField
+          fullWidth
+          name="taskTitle"
           value={newTask.title}
-          onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+          onChange={handleInputChange}
+          margin="normal"
+          variant="outlined"
+          placeholder="Task Title"
+          inputProps={{
+            style: {
+              fontSize: "1.25rem",
+              padding: "8px 0",
+            },
+          }}
         />
-        <button>
-          <CalendarTodayIcon /> Add date
-        </button>
-        <select
-          value={newTask.status}
-          onChange={(e) =>
-            setNewTask({
-              ...newTask,
-              status: e.target.value as NewTask["status"],
-            })
-          }
-        >
-          <option value="TO-DO">TO-DO</option>
-          <option value="IN-PROGRESS">IN-PROGRESS</option>
-          <option value="COMPLETED">COMPLETED</option>
-        </select>
-        <select
-          value={newTask.category}
-          onChange={(e) =>
-            setNewTask({
-              ...newTask,
-              category: e.target.value as NewTask["category"],
-            })
-          }
-        >
-          <option value="WORK">WORK</option>
-          <option value="PERSONAL">PERSONAL</option>
-        </select>
+        <span>
+          <AddDate />
+        </span>
+        <AddTaskToolTipMenu status="status" />
+        <AddTaskToolTipMenu status="category" />
       </div>
     </div>
   );
