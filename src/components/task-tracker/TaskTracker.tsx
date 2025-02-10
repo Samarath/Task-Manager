@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
-import { Task } from "../types/types";
+import { Status } from "../types/types";
 import TodoSection from "./TodoSection";
 import InProgressSection from "./InProgressSection";
 import CompletedSection from "./CompleteSection";
@@ -26,14 +26,6 @@ const TaskTracker: React.FC = () => {
     }
   };
 
-  const handleEditTask = (task: Task) => {
-    console.log(task);
-  };
-
-  const handleDeleteTask = (taskId: number) => {
-    // setTasks(tasks.filter((task) => task.id !== taskId));
-  };
-
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
     // Implement your logic for handling drag and drop here
@@ -51,25 +43,19 @@ const TaskTracker: React.FC = () => {
 
       <DragDropContext onDragEnd={onDragEnd}>
         <TodoSection
-          tasks={taskList.filter((task) => task.status === "to-do")}
+          tasks={taskList.filter((task) => task.status === Status.ToDo)}
           todoViewToggle={todoViewToggle}
           handleCompoToggle={() => handleCompoToggle(1)}
-          handleEditTask={handleEditTask}
-          handleDeleteTask={handleDeleteTask}
         />
         <InProgressSection
-          tasks={taskList.filter((task) => task.status === "in-process")}
+          tasks={taskList.filter((task) => task.status === Status.InProgress)}
           progressViewToggle={progressViewToggle}
           handleCompoToggle={() => handleCompoToggle(2)}
-          handleEditTask={handleEditTask}
-          handleDeleteTask={handleDeleteTask}
         />
         <CompletedSection
-          tasks={taskList.filter((task) => task.status === "completed")}
+          tasks={taskList.filter((task) => task.status === Status.Completed)}
           completeViewToggle={completeViewToggle}
           handleCompoToggle={() => handleCompoToggle(3)}
-          handleEditTask={handleEditTask}
-          handleDeleteTask={handleDeleteTask}
         />
       </DragDropContext>
     </div>

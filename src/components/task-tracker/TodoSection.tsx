@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Droppable, Draggable } from "@hello-pangea/dnd";
-import { Task, TasksType } from "../types/types";
+import { TasksType } from "../types/types";
 import TaskRow from "../tasks/TaskRow";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import classes from "./task-tracker.module.scss";
@@ -12,16 +12,12 @@ interface TodoSectionProps {
   tasks: TasksType[];
   todoViewToggle: boolean;
   handleCompoToggle: () => void;
-  handleEditTask: (task: Task) => void;
-  handleDeleteTask: (taskId: number) => void;
 }
 
 const TodoSection: React.FC<TodoSectionProps> = ({
   tasks,
   todoViewToggle,
   handleCompoToggle,
-  handleEditTask,
-  handleDeleteTask,
 }) => {
   const [toggleAddButton, setToggleAddButton] = useState(false);
 
@@ -67,11 +63,7 @@ const TodoSection: React.FC<TodoSectionProps> = ({
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <TaskRow
-                          task={task}
-                          onEdit={handleEditTask}
-                          onDelete={handleDeleteTask}
-                        />
+                        <TaskRow task={task} />
                       </div>
                     )}
                   </Draggable>

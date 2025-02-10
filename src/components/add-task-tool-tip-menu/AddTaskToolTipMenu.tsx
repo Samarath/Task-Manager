@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import { Tooltip, Menu, MenuItem } from "@mui/material";
 import classes from "./add-task-tool-tip-menu.module.scss";
 import PlusIcon from "@/assests/svg-icons/PlusIcon";
+import { Category, Status } from "../types/types";
 
 interface TaskStatusToolTipMenuProps {
   status: string;
+  selectedOption: Status | Category | "";
+  setSelectedOption: (option: Status | Category | "") => void;
 }
 
-const AddTaskTooltip: React.FC<TaskStatusToolTipMenuProps> = ({ status }) => {
+const AddTaskToolTipMenu: React.FC<TaskStatusToolTipMenuProps> = ({
+  status,
+  selectedOption,
+  setSelectedOption,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -18,7 +25,12 @@ const AddTaskTooltip: React.FC<TaskStatusToolTipMenuProps> = ({ status }) => {
     setAnchorEl(null);
   };
 
-  const renderOptionBasedOnStaus = () => {
+  const handleMenuItemClick = (option: Status | Category) => {
+    setSelectedOption(option);
+    handleClose();
+  };
+
+  const renderOptionBasedOnStatus = () => {
     if (status === "status") {
       return (
         <Menu
@@ -31,9 +43,15 @@ const AddTaskTooltip: React.FC<TaskStatusToolTipMenuProps> = ({ status }) => {
             },
           }}
         >
-          <MenuItem onClick={handleClose}>TO-DO</MenuItem>
-          <MenuItem onClick={handleClose}>IN-PROGRESS</MenuItem>
-          <MenuItem onClick={handleClose}>COMPLETE</MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick(Status.ToDo)}>
+            TO-DO
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick(Status.InProgress)}>
+            IN-PROGRESS
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick(Status.Completed)}>
+            COMPLETE
+          </MenuItem>
         </Menu>
       );
     }
@@ -49,8 +67,12 @@ const AddTaskTooltip: React.FC<TaskStatusToolTipMenuProps> = ({ status }) => {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>WORK</MenuItem>
-        <MenuItem onClick={handleClose}>PERSONAL</MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick(Category.Work)}>
+          WORK
+        </MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick(Category.Personal)}>
+          PERSONAL
+        </MenuItem>
       </Menu>
     );
   };
@@ -58,13 +80,16 @@ const AddTaskTooltip: React.FC<TaskStatusToolTipMenuProps> = ({ status }) => {
   return (
     <div>
       <Tooltip title="Options">
-        <span onClick={handleClick} className={classes.status}>
-          <PlusIcon />
+        <span
+          onClick={handleClick}
+          className={!selectedOption ? classes.status : classes.cursor}
+        >
+          {selectedOption ? selectedOption : <PlusIcon />}
         </span>
       </Tooltip>
-      {renderOptionBasedOnStaus()}
+      {renderOptionBasedOnStatus()}
     </div>
   );
 };
 
-export default AddTaskTooltip;
+export default AddTaskToolTipMenu;

@@ -19,7 +19,7 @@ const BoardCard: React.FC<BoardCardProps> = ({ task }) => {
               e.stopPropagation();
             }}
           >
-            <TooltipMenu />
+            <TooltipMenu task={task} />
           </button>
         </div>
         <div className={classes["board-footer"]}>

@@ -67,11 +67,11 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
   const handleStatusChange = (status: Status) => {
     setTaskData((prev) => ({ ...prev, status }));
   };
-  function generateUniqueId() {
+  const generateUniqueId = () => {
     const timestamp = performance.now().toString(36);
     const randomNumber = Math.random().toString(36).substr(2, 9);
     return timestamp + randomNumber;
-  }
+  };
 
   const handleDateChange = (date: dayjs.Dayjs | null) => {
     const formattedDate = date?.format("DD/MM/YYYY") || "";
@@ -154,7 +154,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
             }}
           />
           <span className={classes.count}>
-            {taskData.description.length} / 300
+            {taskData?.description?.length} / 300
           </span>
         </div>
 
@@ -174,11 +174,11 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
               </span>
               <span
                 className={
-                  taskData.category === Category.Professional
+                  taskData.category === Category.Personal
                     ? classes.active
                     : classes.normal
                 }
-                onClick={() => handleCategoryChange(Category.Professional)}
+                onClick={() => handleCategoryChange(Category.Personal)}
               >
                 Professional
               </span>
@@ -234,7 +234,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
                     choose
                   </MenuItem>
                   <MenuItem value={Status.ToDo}>To Do</MenuItem>
-                  <MenuItem value={Status.InProcess}>In Progress</MenuItem>
+                  <MenuItem value={Status.InProgress}>In Progress</MenuItem>
                   <MenuItem value={Status.Completed}>Completed</MenuItem>
                 </Select>
               </FormControl>

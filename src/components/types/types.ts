@@ -1,12 +1,12 @@
 export enum Status {
-  ToDo = "to-do",
-  InProcess = "in-process",
-  Completed = "completed",
+  ToDo = "TO-Do",
+  InProgress = "IN-PROGRESS",
+  Completed = "COMPLETED",
 }
 
 export enum Category {
-  Work = "work",
-  Professional = "professional",
+  Work = "Work",
+  Personal = "Personal",
 }
 export interface Task {
   id: number;
@@ -31,7 +31,7 @@ export interface FileType {
 
 export interface TasksType {
   id: string;
-  description: string;
+  description?: string;
   title: string;
   status: Status;
   category: Category;

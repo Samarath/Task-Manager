@@ -1,6 +1,6 @@
 import React from "react";
 import { Droppable, Draggable } from "@hello-pangea/dnd";
-import { Task, TasksType } from "../types/types";
+import { TasksType } from "../types/types";
 import TaskRow from "../tasks/TaskRow";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import classes from "./task-tracker.module.scss";
@@ -9,16 +9,12 @@ interface CompletedSectionProps {
   tasks: TasksType[];
   completeViewToggle: boolean;
   handleCompoToggle: () => void;
-  handleEditTask: (task: Task) => void;
-  handleDeleteTask: (taskId: number) => void;
 }
 
 const CompletedSection: React.FC<CompletedSectionProps> = ({
   tasks,
   completeViewToggle,
   handleCompoToggle,
-  handleEditTask,
-  handleDeleteTask,
 }) => {
   return (
     <div className={classes.section}>
@@ -47,11 +43,7 @@ const CompletedSection: React.FC<CompletedSectionProps> = ({
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <TaskRow
-                        task={task}
-                        onEdit={handleEditTask}
-                        onDelete={handleDeleteTask}
-                      />
+                      <TaskRow task={task} />
                     </div>
                   )}
                 </Draggable>

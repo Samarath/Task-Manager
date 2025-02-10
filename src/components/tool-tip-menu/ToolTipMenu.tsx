@@ -3,9 +3,18 @@ import { Tooltip, IconButton, Menu, MenuItem } from "@mui/material";
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@/assests/svg-icons/EditIcon";
 import DeleteIcon from "@/assests/svg-icons/DeleteIcon";
+import { TasksType } from "../types/types";
+import { useAppDispatch } from "@/redux/store";
+import { deleteTask } from "@/redux/slices/tasl-slice";
 
-const TooltipMenu: React.FC = () => {
+interface TooltipMenuProps {
+  task: TasksType;
+}
+
+const TooltipMenu: React.FC<TooltipMenuProps> = ({ task }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const dispatch = useAppDispatch();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -13,6 +22,11 @@ const TooltipMenu: React.FC = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDeleteTask = () => {
+    dispatch(deleteTask(task));
+    handleClose();
   };
 
   return (
@@ -38,7 +52,7 @@ const TooltipMenu: React.FC = () => {
           </span>
           Edit
         </MenuItem>
-        <MenuItem onClick={handleClose} sx={{ color: "#DA2F2F" }}>
+        <MenuItem onClick={handleDeleteTask} sx={{ color: "#DA2F2F" }}>
           <span style={{ marginRight: "10px" }}>
             <DeleteIcon />
           </span>
