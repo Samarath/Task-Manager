@@ -6,6 +6,7 @@ import DeleteIcon from "@/assests/svg-icons/DeleteIcon";
 import { TasksType } from "../types/types";
 import { useAppDispatch } from "@/redux/store";
 import { deleteTask } from "@/redux/slices/tasl-slice";
+import EditTaskModal from "../edit-task-modal/EditTaskModal";
 
 interface TooltipMenuProps {
   task: TasksType;
@@ -13,6 +14,7 @@ interface TooltipMenuProps {
 
 const TooltipMenu: React.FC<TooltipMenuProps> = ({ task }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -26,6 +28,11 @@ const TooltipMenu: React.FC<TooltipMenuProps> = ({ task }) => {
 
   const handleDeleteTask = () => {
     dispatch(deleteTask(task));
+    handleClose();
+  };
+
+  const handleEditTask = () => {
+    setOpen(true);
     handleClose();
   };
 
@@ -46,7 +53,7 @@ const TooltipMenu: React.FC<TooltipMenuProps> = ({ task }) => {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleEditTask}>
           <span style={{ marginRight: "10px" }}>
             <EditIcon />
           </span>
@@ -59,6 +66,7 @@ const TooltipMenu: React.FC<TooltipMenuProps> = ({ task }) => {
           Delete
         </MenuItem>
       </Menu>
+      <EditTaskModal open={open} onClose={() => setOpen(false)} task={task} />
     </div>
   );
 };

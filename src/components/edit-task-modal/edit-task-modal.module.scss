@@ -15,9 +15,31 @@
 
 .dialogContent {
   display: flex;
-  flex-direction: column;
   gap: 24px;
   padding: 24px !important;
+  height: 70vh;
+  .fristSection {
+    overflow: auto;
+    flex: 1;
+  }
+  .secondSection {
+    .head {
+      color: #0009;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+      padding: 0 10px;
+    }
+    .lists {
+      background-color: #f1f1f1;
+      height: 100%;
+      margin-right: -24px;
+      padding: 10px;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }
 
 .text-editor {
@@ -73,7 +95,7 @@
         border: 1px solid #00000030;
         border-radius: 41px;
         padding: 10px 24px;
-        color: #fff;
+        color: #090909;
         font-weight: 600;
         font-size: 0.875rem;
         display: flex;
@@ -162,7 +184,6 @@
   display: flex;
   justify-content: flex-end;
   gap: 16px;
-  margin-top: 24px;
   background-color: #f1f1f1;
   padding: 20px;
   .cancel-btn {

@@ -8,9 +8,6 @@ const Filters: React.FC = () => {
   const [dueDate, setDueDate] = useState("Due Date");
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = (taskData) => {
-    console.log("Task Data:", taskData);
-  };
   return (
     <div className={classes.filtersContainer}>
       <div className={classes.firstSection}>
@@ -75,11 +72,7 @@ const Filters: React.FC = () => {
         >
           ADD TASK
         </Button>
-        <CreateTaskModal
-          open={open}
-          onClose={() => setOpen(false)}
-          onSubmit={handleSubmit}
-        />
+        <CreateTaskModal open={open} onClose={() => setOpen(false)} />
       </div>
     </div>
   );
