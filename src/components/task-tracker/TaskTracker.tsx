@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { Status } from "../types/types";
 import TodoSection from "./TodoSection";
@@ -6,13 +6,15 @@ import InProgressSection from "./InProgressSection";
 import CompletedSection from "./CompleteSection";
 import classes from "./task-tracker.module.scss";
 import { useAppSelector } from "@/redux/store";
+import NotFound from "@/assests/svg-icons/NotFound";
 
 const TaskTracker: React.FC = () => {
   const [todoViewToggle, setTodoViewToggle] = useState(false);
   const [progressViewToggle, setProgressViewToggle] = useState(false);
   const [completeViewToggle, setCompleteViewToggle] = useState(false);
-  const { taskList } = useAppSelector((state) => state.taskManager);
-  console.log(taskList);
+  const { taskList, searchList, search } = useAppSelector(
+    (state) => state.taskManager
+  );
 
   const handleCompoToggle = (id: number) => {
     if (id === 1) {
@@ -28,36 +30,66 @@ const TaskTracker: React.FC = () => {
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
-    // Implement your logic for handling drag and drop here
+  };
+
+  const handleData = (type: string) => {
+    if (type === "todo") {
+      return searchList.length
+        ? searchList.filter((task) => task.status === Status.ToDo)
+        : taskList.filter((task) => task.status === Status.ToDo);
+    }
+    if (type === "progress") {
+      return searchList.length
+        ? searchList.filter((task) => task.status === Status.InProgress)
+        : taskList.filter((task) => task.status === Status.InProgress);
+    }
+
+    return searchList.length
+      ? searchList.filter((task) => task.status === Status.Completed)
+      : taskList.filter((task) => task.status === Status.Completed);
   };
 
   return (
     <div className={classes["container"]}>
-      <div className={classes.headers}>
-        <div className={classes.header}>Task name</div>
-        <div className={classes.header}>Due on</div>
-        <div className={classes.header}>Task Status</div>
-        <div className={classes.header}>Task Category</div>
-        <div className={classes.header}></div>
-      </div>
+      {search && searchList.length === 0 ? (
+        <div className={classes["not-found"]}>
+          <div className={classes["icon"]}>
+            <span>
+              <NotFound />
+            </span>
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        <TodoSection
-          tasks={taskList.filter((task) => task.status === Status.ToDo)}
-          todoViewToggle={todoViewToggle}
-          handleCompoToggle={() => handleCompoToggle(1)}
-        />
-        <InProgressSection
-          tasks={taskList.filter((task) => task.status === Status.InProgress)}
-          progressViewToggle={progressViewToggle}
-          handleCompoToggle={() => handleCompoToggle(2)}
-        />
-        <CompletedSection
-          tasks={taskList.filter((task) => task.status === Status.Completed)}
-          completeViewToggle={completeViewToggle}
-          handleCompoToggle={() => handleCompoToggle(3)}
-        />
-      </DragDropContext>
+            <p>It looks like we can&lsquot find any results that match.</p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className={classes.headers}>
+            <div className={classes.header}>Task name</div>
+            <div className={classes.header}>Due on</div>
+            <div className={classes.header}>Task Status</div>
+            <div className={classes.header}>Task Category</div>
+            <div className={classes.header}></div>
+          </div>
+
+          <DragDropContext onDragEnd={onDragEnd}>
+            <TodoSection
+              tasks={handleData("todo")}
+              todoViewToggle={todoViewToggle}
+              handleCompoToggle={() => handleCompoToggle(1)}
+            />
+            <InProgressSection
+              tasks={handleData("progress")}
+              progressViewToggle={progressViewToggle}
+              handleCompoToggle={() => handleCompoToggle(2)}
+            />
+            <CompletedSection
+              tasks={handleData("completed")}
+              completeViewToggle={completeViewToggle}
+              handleCompoToggle={() => handleCompoToggle(3)}
+            />
+          </DragDropContext>
+        </>
+      )}
     </div>
   );
 };

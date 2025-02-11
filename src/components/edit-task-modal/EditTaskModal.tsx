@@ -50,7 +50,6 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   useEffect(() => {
     const dateLen = task.date.length - 1;
     setTaskData(task);
-    console.log(task.date[dateLen], "andar hai");
     setCurrentDate(task.date[dateLen]);
   }, [task]);
 

@@ -3,10 +3,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type taskState = {
   taskList: TasksType[];
+  searchList: TasksType[];
+  workFilter: string;
+  dateFilter: string;
+  search: string;
 };
 
 const initialState: taskState = {
   taskList: [],
+  searchList: [],
+  workFilter: "Category",
+  dateFilter: "",
+  search: "",
 };
 
 const userSlice = createSlice({
@@ -32,8 +40,33 @@ const userSlice = createSlice({
         state.taskList.splice(index, 1);
       }
     },
+    updateSearchList: (state, action: PayloadAction<TasksType[]>) => {
+      state.searchList = action.payload;
+    },
+    setWorkFilter: (state, action: PayloadAction<string>) => {
+      state.workFilter = action.payload;
+    },
+    setDateFilter: (state, action: PayloadAction<string>) => {
+      state.dateFilter = action.payload;
+    },
+    resetWorkDateFilter: (state) => {
+      state.dateFilter = "";
+      state.workFilter = "Category";
+    },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
+    },
   },
 });
 
-export const { createTask, updateTask, deleteTask } = userSlice.actions;
+export const {
+  createTask,
+  updateTask,
+  deleteTask,
+  updateSearchList,
+  setDateFilter,
+  setWorkFilter,
+  resetWorkDateFilter,
+  setSearch,
+} = userSlice.actions;
 export default userSlice.reducer;

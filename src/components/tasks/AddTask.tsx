@@ -8,7 +8,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useAppDispatch } from "@/redux/store";
-import { createTask } from "@/redux/slices/tasl-slice";
+import { createTask, resetWorkDateFilter } from "@/redux/slices/tasl-slice";
 
 const AddTask: FC = () => {
   const initialState = {
@@ -49,10 +49,6 @@ const AddTask: FC = () => {
   };
 
   const handleSubmit = () => {
-    console.log(taskData.status, selectedOption, selectedOptionCategory);
-    console.log(taskData.date);
-    console.log(taskData.title);
-
     if (selectedOption && selectedOptionCategory && taskData.title) {
       dispatch(
         createTask({
@@ -63,6 +59,7 @@ const AddTask: FC = () => {
         })
       );
       setTaskData(initialState);
+      dispatch(resetWorkDateFilter());
     } else {
       alert("fill fill all the necessary fields");
     }
